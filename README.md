@@ -3,6 +3,10 @@
 
 BroSpot is a mobile plaform for a drink stall located in NUS School of Computing to enhance the existing customer experience. It offers features as online pre-order, real-time menu updates, customisable orders as well as reward system for consumers, This platform prioriteses convenience and efficency, reducing the wait times from the conventional long queues and helping streamline the drink stall's operations.
 
+## [Video Demo Link](https://drive.google.com/file/d/1KQNuB72Q1Pr0j17PVtcuEgUxU9zMw8fA/view?usp=sharing)
+https://drive.google.com/file/d/1KQNuB72Q1Pr0j17PVtcuEgUxU9zMw8fA/view?usp=sharing
+
+## Features
 ### Home page, Menu page, Order page, Voucher page, Payment, Account page, Leaderboard page
 <img src="https://github.com/user-attachments/assets/dc184b6d-6f43-47b6-b8d1-19345e98b1c3" width="300">
 <img src="https://github.com/user-attachments/assets/8414a43e-d0ed-42de-b9b2-347bb9e45c7b" width="300">
