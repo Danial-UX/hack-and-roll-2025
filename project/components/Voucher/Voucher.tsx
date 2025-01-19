@@ -7,7 +7,7 @@ import { Session } from '@supabase/supabase-js'
 import { styles } from './styles';
 import RedeemButton from './RedeemButton';
 import { Ionicons } from '@expo/vector-icons';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 interface Voucher {
     id: number
@@ -19,8 +19,9 @@ interface Voucher {
 }
 
 export default function Voucher({ session}: { session: Session }) {
+    const navigation = useNavigation();
     const route = useRoute();
-    const { orderId } = route.params as { orderId: string } || {};  
+    const { orderId, onVoucherApplied } = route.params as { orderId: string; onVoucherApplied: () => void };
 
     const [vouchers, setVouchers] = useState<Voucher[]>([])
     const [loading, setLoading] = useState(true)
@@ -47,7 +48,6 @@ export default function Voucher({ session}: { session: Session }) {
         }
     } 
 
-
     async function fetchUserVouchers() {
         if (!session?.user) throw new Error('No user on the session!')
         try {
@@ -72,6 +72,26 @@ export default function Voucher({ session}: { session: Session }) {
         }  
     }
     
+    const handleRedeemVoucher = async (voucherId: number) => {
+        try {
+            // Redeem voucher logic
+            const { data, error } = await supabase
+                .from('Orders_testing')
+                .update({ active_voucher: voucherId })
+                .eq('id', orderId);
+
+            if (error) throw error;
+
+            if (onVoucherApplied) {
+                onVoucherApplied(); // Trigger callback to refresh total cost
+            }
+
+            navigation.goBack(); // Navigate back to the Order screen
+        } catch (error) {
+            console.error('Error redeeming voucher:', error);
+        }
+    };
+
     const renderVoucher = ({ item }: { item: Voucher }) => {
         type IconName = 'wallet-outline' | 'pricetags-outline' | 'card-outline' | 'gift-outline'
                         | 'bag-add-outline'

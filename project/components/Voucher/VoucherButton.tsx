@@ -3,15 +3,11 @@ import { Button, Input } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 
-const VoucherButton = ({orderId}: {orderId: string}) => {
+const VoucherButton = ({ orderId, onVoucherApplied }: { orderId: string; onVoucherApplied: () => void }) => {
     const navigation = useNavigation();
 
     const handlePress = () => {
-        console.log("kirby")
-        console.log(orderId)
-
-        // orderID gets lost here :(
-        navigation.navigate('Voucher', { orderId });
+        navigation.navigate('Voucher', { orderId, onVoucherApplied });
     };
 
     return (
